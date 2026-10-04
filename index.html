@@ -18,14 +18,30 @@
     --accent: #ff8fb1;
   }
   * { box-sizing: border-box; }
-  html, body { margin: 0; min-height: 100%; }
+  html, body { margin: 0; }
   body {
+    min-height: 100vh;
+    min-height: 100dvh;
     background: var(--bg);
     color: var(--text);
     font-family: "Nunito", system-ui, -apple-system, "Segoe UI", sans-serif;
     display: flex;
     justify-content: center;
+    align-items: flex-start;
     padding: 56px 20px 40px;
+  }
+  /* comic halftone dots fading out from the top */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background-image: radial-gradient(var(--line) 1.6px, transparent 1.8px);
+    background-size: 20px 20px;
+    -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 0%, #000, transparent 75%);
+            mask-image: radial-gradient(ellipse 80% 70% at 50% 0%, #000, transparent 75%);
+    opacity: .7;
   }
   main { width: 100%; max-width: 440px; text-align: center; }
   h1 { margin: 0; font-size: 2.2rem; font-weight: 900; letter-spacing: .01em; }
@@ -51,6 +67,17 @@
     outline: none;
   }
   a.link:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--accent); }
+
+  /* Desktop / large screens */
+  @media (min-width: 768px) {
+    body { align-items: center; padding: 48px 24px; }
+    main { max-width: 560px; }
+    h1 { font-size: 3.4rem; }
+    .bio { font-size: 1.2rem; margin: 8px 0 44px; }
+    nav { gap: 18px; }
+    a.link { padding: 22px 28px; font-size: 1.2rem; box-shadow: 6px 6px 0 var(--line); }
+    a.link:hover, a.link:focus-visible { box-shadow: 9px 9px 0 var(--accent); }
+  }
   @media (prefers-reduced-motion: reduce) { a.link { transition: none; } }
 </style>
 </head>
@@ -65,18 +92,20 @@
   /* ===== EDIT HERE ONLY ===== */
 
   const NAME = "ParKuma";
-  const BIO  = "Comic Artist";
+  const BIO  = "Webcomic artist";
 
   // Each link is one line: { name: "Button text", url: "https://..." },
   // ADD a link: copy one line and paste it below.
   // DELETE a link: remove that whole line.
   // EDIT a link: change the text inside the quotes.
   const LINKS = [
-    { name: "Instagram", url: "https://www.instagram.com/parkuma_art" },
-    { name: "X (Twitter)",          url: "https://x.com/parkuma_art" },
-    { name: "BlueSky",        url: "https://bsky.app/profile/parkuma.bsky.social" },
-    { name: "YouTube",      url: "https://www.youtube.com/@ParKuma" },
-    { name: "Support me",       url: "https://example.com" },
+    { name: "Support Me", url: "https://paypal.me/ParKuma" },
+    { name: "Patreon", url: "https://www.patreon.com/ParKuma" },
+    { name: "Instagram",          url: "https://www.instagram.com/parkuma_art" },
+    { name: "X (Twitter)",        url: "https://x.com/parkuma_art" },
+    { name: "BlueSky",      url: "https://bsky.app/profile/parkuma.bsky.social" },
+    { name: "YouTube",       url: "https://www.youtube.com/@ParKuma" },
+    { name: "E-Mail", url: "parkumaofficial@gmail.com" },
   ];
 
   /* ===== DO NOT EDIT BELOW ===== */
